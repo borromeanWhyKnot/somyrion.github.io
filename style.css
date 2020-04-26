@@ -7,7 +7,26 @@ body {
 	font-weight: 400;
 }
 
-textarea, input {
+textarea, input, select {
 	background-color:#0080c4;
 	border:none;
+	color:#ffffff;
+	font-family: 'Source Sans Pro', sans-serif;
+	padding:10px;
+	margin:25px;
+}
+
+textarea {
+	width: 90%;
+}
+
+fieldset {
+	border: 2px solid #ff9900;
+	padding: 30px;
+	margin:25px;
+}
+legend {
+	padding: 0 10px;
+  	font-size: 16pt;
+  	font-weight: bold;
 }
