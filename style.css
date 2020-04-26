@@ -3,4 +3,11 @@
 body {
 	background-color: #019aed;
 	color:#ffffff;
+	font-family: 'Source Sans Pro', sans-serif;
+	font-weight: 400;
+}
+
+textarea, input {
+	background-color:#0080c4;
+	border:none;
 }
