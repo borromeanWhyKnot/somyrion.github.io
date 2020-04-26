@@ -74,6 +74,7 @@
         var generateButton = document.getElementById('generate-button');
 		function a(html) { $("#output").append(html); }
         function generate() {
+			$("#output").empty();
 			a("<h2>Title</h2>");
 			// Determining the Organ
 			if ($("#category").val().indexOf("ga") > -1) {
