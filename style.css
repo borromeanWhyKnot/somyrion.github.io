@@ -1,15 +1,30 @@
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;900&display=swap');
 
 body {
-	background-color: #019aed;
+    background-color: #019aed;
 	color:#ffffff;
 	font-family: 'Source Sans Pro', sans-serif;
 	font-weight: 400;
 	padding:0 25px;
 }
 
+body::after {
+  content: "";
+  background: url('https://tspforums.xyz/images/18myskins/rainbow2.jpg');
+  background-position: top center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  opacity: 0.2;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position:fixed;
+  z-index: -1;   
+}
+
 textarea, input, select, button {
-	background-color:#0080c4;
+	background-color:rgba(0, 128, 196, 0.6);
 	border:none;
 	color:#ffffff;
 	font-family: 'Source Sans Pro', sans-serif;
