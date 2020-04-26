@@ -74,13 +74,13 @@ hr {
 #output {
 	font-family:'Source Code Pro';
 	font-size:10pt;
-	background-color:#38b9ff;
+	background-color:rgba(56, 185, 255, 0.6);
 	padding:25px;
 }
 
 #output h2 {
 	font-family:'Source Sans Pro';
-	background-color:#019aed;
+	background-color:rgba(1, 154, 237, 0.6);
 	padding:5px 25px;
 	text-align:center;
 }
