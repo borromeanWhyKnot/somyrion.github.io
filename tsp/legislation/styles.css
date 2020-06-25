@@ -30,6 +30,7 @@ h2 {
 	font-weight:bold;
 	font-size:1.75em;
 	font-variant:small-caps;
+	margin: 30px;
 }
 .l2 {
 	font-weight:bold;
@@ -45,7 +46,7 @@ ol {
 ol > li {
     list-style: none;
     position: relative;
-	padding: 5pt 3%;
+	padding: 10px 3%;
 }
 ol > li:before {
     counter-increment: list;
@@ -58,7 +59,7 @@ ol > li > ol {
 	padding-left:15%;
 }
 ol > li > ol > li {
-	padding: 2px 1%;
+	padding: 2px 3%;
 }
 
 ol > li > ol > li:before {
@@ -93,19 +94,19 @@ a {
 	float:right;
 }
 .header-link {
-  position: absolute;
-  left: -0.5em;
-  opacity: 0;
+	position:relative;
+	left:-5em;
+	opacity:0;
 
   \-webkit-transition: opacity 0.2s ease-in-out 0.1s;
   \-moz-transition: opacity 0.2s ease-in-out 0.1s;
   \-ms-transition: opacity 0.2s ease-in-out 0.1s;
 }
 
-h2:hover .header-link,
-h3:hover .header-link,
-h4:hover .header-link,
-h5:hover .header-link,
-h6:hover .header-link {
-  opacity: 1;
+
+li:hover > .header-link,
+h1:hover .header-link,
+.l1:hover .header-link,
+.l2:hover .header-link {
+	opacity:1;
 }
