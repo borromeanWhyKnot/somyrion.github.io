@@ -1,0 +1,111 @@
+body {
+	font-family: "Old Standard TT", Century Schoolbook, Times New Roman, serif;
+	margin:50px 25%;
+	text-align:justify;
+	font-size:11pt;
+}
+html {
+	scroll-behavior: smooth;
+}
+h1, h2, .subtitle, .l1 {
+	text-align:center;
+}
+h1 {
+	font-variant:small-caps;
+	font-size: 3em;
+	padding:0;
+	margin:0;
+}
+h2 {
+	font-weight:normal;
+	font-size:1.5em;
+	margin-top:0;
+}
+.subtitle {
+	font-style:italic;
+	font-size:1.2em;
+	margin-bottom:80px;
+}
+.l1 {
+	font-weight:bold;
+	font-size:1.75em;
+	font-variant:small-caps;
+}
+.l2 {
+	font-weight:bold;
+	font-size:1.1em;
+}
+::selection {
+	background:#eeeeee;
+}
+ol {
+    counter-reset: list;
+	padding-left:none;
+}
+ol > li {
+    list-style: none;
+    position: relative;
+	padding: 5pt 3%;
+}
+ol > li:before {
+    counter-increment: list;
+    content: "(" counter(list) ")";
+    position: absolute;
+    left: -1.4em;
+}
+
+ol > li > ol {
+	padding-left:15%;
+}
+ol > li > ol > li {
+	padding: 2px 1%;
+}
+
+ol > li > ol > li:before {
+	content: counter(list, lower-alpha) ".";
+}
+:target {
+	background:#eee;
+	border-radius: 10px;
+}
+hr {
+	border: 1px solid #000000;
+	margin-bottom: 80px;
+}
+
+.links {
+	text-align:center;
+	font-variant:small-caps;
+	font-size:14pt;
+	margin-top:80px;
+}
+a {
+	color:#888;
+	text-decoration:none;
+}
+.left {
+	float:left;
+}
+.center {
+	text-align:center;
+}
+.right {
+	float:right;
+}
+.header-link {
+  position: absolute;
+  left: -0.5em;
+  opacity: 0;
+
+  \-webkit-transition: opacity 0.2s ease-in-out 0.1s;
+  \-moz-transition: opacity 0.2s ease-in-out 0.1s;
+  \-ms-transition: opacity 0.2s ease-in-out 0.1s;
+}
+
+h2:hover .header-link,
+h3:hover .header-link,
+h4:hover .header-link,
+h5:hover .header-link,
+h6:hover .header-link {
+  opacity: 1;
+}
