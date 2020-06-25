@@ -9,10 +9,14 @@
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<script>
 $(function() {
-  return $("h1, .li, .l2, li").each(function(i, el) {
+  return $("h1, .l1, .l2, li").each(function(i, el) {
     var $el, icon, id;
     $el = $(el);
-    id = $el.attr('id');
+	if ($el == "h1" || $el == ".l1" || $el == ".l2") {
+		id = $el.parent().attr('id');
+	} else {
+		id = $el.attr('id');
+	}
     icon = '<i class="fa fa-link"></i>';
     if (id) {
       return $el.prepend($("<a />").addClass("header-link").attr("href", "#" + id).html(icon));
