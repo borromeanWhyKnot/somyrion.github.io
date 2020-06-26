@@ -7,7 +7,7 @@ body {
 html {
 	scroll-behavior: smooth;
 }
-h1, h2, .subtitle, .l1 {
+h1, h2, .subtitle {
 	text-align:center;
 }
 h1 {
@@ -24,7 +24,7 @@ h2 {
 .subtitle {
 	font-style:italic;
 	font-size:1.2em;
-	margin-bottom:80px;
+	margin:20px 0 80px 0;
 }
 .l1 {
 	font-weight:bold;
@@ -43,26 +43,26 @@ ol {
     counter-reset: list;
 	padding-left:none;
 }
-ol > li {
+ol li {
     list-style: none;
     position: relative;
 	padding: 10px 3%;
 }
-ol > li:before {
+ol li:before {
     counter-increment: list;
     content: "(" counter(list) ")";
     position: absolute;
     left: -1.4em;
 }
 
-ol > li > ol {
+ol > ol {
 	padding-left:15%;
 }
-ol > li > ol > li {
+ol > ol > li {
 	padding: 2px 3%;
 }
 
-ol > li > ol > li:before {
+ol > ol > li:before {
 	content: counter(list, lower-alpha) ".";
 }
 :target {
@@ -95,19 +95,13 @@ a {
 }
 .header-link {
 	position:relative;
-	left:-5em;
+	left:0.5em;
 	opacity:0;
 	font-size:11pt !important;
 
   \-webkit-transition: opacity 0.2s ease-in-out 0.1s;
   \-moz-transition: opacity 0.2s ease-in-out 0.1s;
   \-ms-transition: opacity 0.2s ease-in-out 0.1s;
-}
-
-h1:hover .header-link,
-.l1:hover .header-link,
-.l2:hover .header-link {
-	left:-0.5em;
 }
 
 li:hover > .header-link,
