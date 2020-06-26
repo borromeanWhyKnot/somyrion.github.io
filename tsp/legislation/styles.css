@@ -97,12 +97,18 @@ a {
 	position:relative;
 	left:-5em;
 	opacity:0;
+	font-size:11pt !important;
 
   \-webkit-transition: opacity 0.2s ease-in-out 0.1s;
   \-moz-transition: opacity 0.2s ease-in-out 0.1s;
   \-ms-transition: opacity 0.2s ease-in-out 0.1s;
 }
 
+h1:hover .header-link,
+.l1:hover .header-link,
+.l2:hover .header-link {
+	left:-0.5em;
+}
 
 li:hover > .header-link,
 h1:hover .header-link,
