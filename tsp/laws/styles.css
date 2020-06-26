@@ -122,6 +122,7 @@ h1:hover .header-link,
 	list-style:upper-roman;
 	margin:80px 0;
 	font-size:1.2em;
+	font-variant: small-caps;
 }
 .contents li {
 	margin:10px 0;
