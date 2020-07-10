@@ -91,6 +91,8 @@
 				a("Vote AGAINST '");
 			} else if ($("#position").val() == "abstain") {
 				a("DON'T VOTE on '");
+			} else {
+				a("Opinions on '");
 			}
 			// Naming the Proposal
 			if ($("#category").val().indexOf("rep") > -1) {
@@ -162,7 +164,7 @@
 			}
 			a("[/i]<br>[color=#019AED][b]Author:[/b][/color] [nation]" + $("#author").val() + "[/nation]<br>[color=#019AED][b]Purpose:[/b][/color] ");
 			a($("#purpose").val() + "[/size][/font][/align]<br><br>[align=justify][font=Avenir, Segoe UI][size=140][color=#019AED][b]Links[/b][/color][/size][/font][/align]<br><br>[align=justify][font=Avenir, Segoe UI][size=120][url=");
-			a($("#onsite-thread").val() + "][color=#FF9900][b]On-site drafting forum thread[/b][/color][/url]<br>[url=" + $("#tsp-thread").val());
+			a($("#onsite-thread").val() + "][color=#FF9900][b]Join the discussion on OWL's message board![/b][/color][/url]<br>[url=" + $("#tsp-thread").val());
 			a("][color=#FF9900][b]Join the discussion on TSP's forum thread![/b][/color][/url][/size][/font][/align][/box]<br><br>[box][anchor=recommendation][/anchor]<br>[background-block=#019AED][url=#Top][img]https://i.imgur.com/2F5PXmd.png[/img][/url]<br>[align=center][img]https://i.imgur.com/IEt9MQy.png[/img]<br>[font=Avenir, Segoe UI][size=300]");
 			if ($("#position").val() == "for") {
 				a("[color=#FFFFFF]Vote [/color][background=#00bb00][color=#00bb00].[/color][color=#ffffff][B]For[/b][/color][color=#00bb00].[/color][/background][/size][/font]<br>[color=#019AED]·[/color][/align][/background-block]");
@@ -179,7 +181,9 @@
 			$("#opinions-for-tsp > div").each(		function(index) {
 				a("[align=justify][font=Avenir, Segoe UI][size=120][i]" + $(this).find("textarea:first-of-type").val());
 				a("[/i]<br><br>[quote=" + $(this).find("input:first-of-type").val() + ";");
-				if ($(this).find("input:last-of-type").val()) {
+				if ($(this).find("input:last-of-type").val().includes("postid=")) {
+					a($(this).find("input:last-of-type").val().split("postid=")[1]);
+				} else if ($(this).find("input:last-of-type").val()) {
 					a($(this).find("input:last-of-type").val());
 				} else {
 					a("0");
@@ -253,7 +257,7 @@
 					forTSP.appendChild(document.createElement("br"));
 					forTSP.appendChild(document.createTextNode("Nation: "));
 					forTSP.appendChild(nation);
-					forTSP.appendChild(document.createTextNode("Paste RMB post ID here if from a RMB post: "));
+					forTSP.appendChild(document.createTextNode("Paste RMB post link or post ID here if from a RMB post: "));
 					forTSP.appendChild(rmb);
 					forTSP.appendChild(document.createElement("br"));
 					forTSP.appendChild(document.createTextNode('Intro text (e.g. "[nation]Aumeltopia[/nation] is the Delegate of the South Pacific. He posted the following on TSP\'s forums:"):'));
