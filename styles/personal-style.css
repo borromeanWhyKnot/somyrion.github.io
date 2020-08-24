@@ -33,6 +33,7 @@ html {
 	display: inline-block;
 	padding: 0 30px;
 	font-style:italic;
+	text-transform: lowercase;
 }
 
 #links li a {
@@ -43,4 +44,9 @@ html {
 
 #links li a:hover {
 	color:#269a85;
+}
+
+::selection {
+	background:#945cbc;
+	color:#fff;
 }
