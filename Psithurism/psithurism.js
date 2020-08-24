@@ -7,7 +7,7 @@
 // @include        https://www.nationstates.net/nation=*/page=nukes*
 // @include        https://www.nationstates.net/page=nuke*
 // @include        https://www.nationstates.net/page=faction*
-// @updateURL    https://github.com/jmikk/NS/raw/master/Names%20Are%20Hard%20to%20come%20up%20with%20so%20I%20guess%20its%20a%20potato.user.js
+// @updateURL    https://github.com/Somyrion/somyrion.github.io/raw/master/Psithurism/psithurism.js
 // @require      https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js
 // @grant        none
 // ==/UserScript==
