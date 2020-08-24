@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Psithurism.user.js
 // @namespace    http://tampermonkey.net/
-// @version      0.1.0
+// @version      0.1.1
 // @description  Hotkeys for the N-Day Potato Alliance, based on NSBreeze++
 // @author       Somyrion
 // @match        https://www.nationstates.net/*
