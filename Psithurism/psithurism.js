@@ -4,11 +4,9 @@
 // @version      0.1.0
 // @description  Hotkeys for the N-Day Potato Alliance, based on NSBreeze++
 // @author       Somyrion
-// @include        https://www.nationstates.net/nation=*/page=nukes*
-// @include        https://www.nationstates.net/page=nuke*
-// @include        https://www.nationstates.net/page=faction*
+// @match        https://www.nationstates.net/*
 // @updateURL    https://github.com/Somyrion/somyrion.github.io/raw/master/Psithurism/psithurism.js
-// @require      https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js
+// @require      https://code.jquery.com/jquery-3.5.1.min.js
 // @grant        none
 // ==/UserScript==
 
@@ -26,6 +24,8 @@
 [L*] Launch nukes that are targetted
 
 */
+
+/* global $ */
 
 var facID = "12"; // update when N-Day starts!
 (function() {
