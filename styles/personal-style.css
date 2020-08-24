@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Source+Serif+Pro:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Source+Serif+Pro:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
 html {
 	background-image: url("/images/background.png");
@@ -8,13 +8,14 @@ html {
 }
 
 .box {
-	background: rgba(255, 255, 255, 0.3);
+	background: rgba(0, 0, 0, 0.3);
 	text-align:center;
 	padding:50px;
 	margin:100px;
 	position: fixed;
 	top: 50%;
 	left: 50%;
+	width:80%;
 	transform: translate(-50%, -50%);
 	border-radius: 10px;
     box-shadow: 5px 5px rgba(0,0,0,0.1);
@@ -23,24 +24,23 @@ html {
 #nametitle {
 	font-size: 6em;
     font-weight: bold;
-	padding: 50px 0;
+	padding: 0 0 50px 0;
 }
 
 #links li {
 	font-family: 'Source Serif Pro', serif;
-	font-size:1.5em;
+	font-size:2em;
 	display: inline-block;
-	padding: 0 50px;
+	padding: 0 20px;
 	font-style:italic;
 }
 
 #links li a {
 	text-decoration: none;
-	color: #269a85;
+	color: #75c350;
 	transition: .3s ease-in-out;
 }
 
 #links li a:hover {
-	background: rgba(255,255,255,0.5);
-	color:#75c350;
+	color:#269a85;
 }
