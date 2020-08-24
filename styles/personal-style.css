@@ -11,7 +11,6 @@ html {
 	background: rgba(0, 0, 0, 0.3);
 	text-align:center;
 	padding:50px;
-	margin:100px;
 	position: fixed;
 	top: 50%;
 	left: 50%;
@@ -22,16 +21,17 @@ html {
 }
 
 #nametitle {
-	font-size: 6em;
-    font-weight: bold;
+	font-size: 8em;
+    font-weight: 300;
 	padding: 0 0 50px 0;
+	color:#fff;
 }
 
 #links li {
 	font-family: 'Source Serif Pro', serif;
 	font-size:2em;
 	display: inline-block;
-	padding: 0 20px;
+	padding: 0 30px;
 	font-style:italic;
 }
 
