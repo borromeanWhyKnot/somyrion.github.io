@@ -1,4 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Source+Serif+Pro:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
 html, body {
 	background-image: url("images/background.png");
 	background-size: cover;
+	font-family: 'Fira Sans', sans-serif;
+	color: #444;
+}
+
+.box {
+	background: rgba(255, 255, 255, 0.5);
+	text-align:center;
+	padding:100px;
+	margin:100px;
+}
+
+#nametitle {
+	font-family: 'Source Serif Pro', serif;
+	font-size:3em;
+}
+
+#links, #links li {
+	font-size:1.5em;
+	display: inline-block;
+}
+
+#links li a {
+	text-decoration: none;
+	color: #444;
+	transition: .3s ease-in-out;
+}
+
+#links li a:hover {
+	background: rgba(255,255,255,0.5);
 }
