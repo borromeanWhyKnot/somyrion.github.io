@@ -63,14 +63,14 @@ var facID = "12"; // update when N-Day starts!
 			}
 			// Convert Production (P, P)
 			else if (e.keyCode == 80) {
-				if (window.location.href.indexOf("view=production") > -1) {
-					if ($('span.fancylike')[0].innerHTML.indexOf("Military") > -1) {
+				if (window.location.href.indexOf("view=production") > -1 && window.location.href.indexOf("page=nukes") > -1 && (window.location.href.indexOf("nation="+$('body').attr('data-nname')) > -1 || window.location.href.indexOf("nation") <= -1)) {
+					if ($('span.fancylike')[0].text().indexOf("Military") > -1) {
 						$('.button[name="convertproduction"][value^="nukes"]').first().trigger('click');
 					}
-					else if ($('span.fancylike')[0].innerHTML.indexOf("Strategic") > -1) {
+					else if ($('span.fancylike')[0].text().indexOf("Strategic") > -1) {
 						$('.button[name="convertproduction"][value^="shield"]').first().trigger('click');
 					}
-					else if ($('span.fancylike')[0].innerHTML.indexOf("Economic") > -1) {
+					else if ($('span.fancylike')[0].text().indexOf("Economic") > -1) {
 						$('.button[name="convertproduction"][value^="shield"]').first().trigger('click');
 					}
 				}
@@ -80,7 +80,7 @@ var facID = "12"; // update when N-Day starts!
 			}
 			// Convert Production to Nukes (W, W)
 			else if (e.keyCode == 87) {
-				if (window.location.href.indexOf("view=production") > -1) {
+				if (window.location.href.indexOf("view=production") > -1 && window.location.href.indexOf("page=nukes") > -1 && (window.location.href.indexOf("nation="+$('body').attr('data-nname')) > -1 || window.location.href.indexOf("nation") <= -1)) {
 					$('.button[name="convertproduction"][value^="nukes"]').first().trigger('click');
 				}
 				else {
@@ -89,7 +89,7 @@ var facID = "12"; // update when N-Day starts!
 			}
 			// Convert Production to Shields (S, S)
 			else if (e.keyCode == 83) {
-				if (window.location.href.indexOf("view=production") > -1) {
+				if (window.location.href.indexOf("view=production") > -1 && window.location.href.indexOf("page=nukes") > -1 && (window.location.href.indexOf("nation="+$('body').attr('data-nname')) > -1 || window.location.href.indexOf("nation") <= -1)) {
 					$('.button[name="convertproduction"][value^="shield"]').first().trigger('click');
 				}
 				else {
@@ -98,7 +98,7 @@ var facID = "12"; // update when N-Day starts!
 			}
 			// Your Nukes, Your Faction (Spacebar, Spacebar)
 			else if (e.keyCode == 32 && e.target == document.body) {
-				if (window.location.href.indexOf("page=nukes") > -1 && window.location.href.indexOf("/view=") <= -1) {
+				if (window.location.href.indexOf("page=nukes") > -1 && window.location.href.indexOf("/view=") <= -1 && (window.location.href.indexOf("nation="+$('body').attr('data-nname')) > -1 || window.location.href.indexOf("nation") <= -1)) {
 					$('.factionname')[0].click();
 				}
 				else {
@@ -126,18 +126,60 @@ var facID = "12"; // update when N-Day starts!
 			}
 			// Perform Targetting (K, K, K, K)
 			else if (e.keyCode == 75) {
-				// if not on the faction's list by nukes already, go to it
-				if (window.location.href.indexOf("page=faction") > -1 && window.location.href.indexOf("fid="+facID) <= -1 && window.location.href.indexOf("view=nukes") <= -1) {
+				// if not on the faction's list of nations already, go to it
+				if (window.location.href.indexOf("page=faction") > -1 && window.location.href.indexOf("fid="+facID) <= -1 && window.location.href.indexOf("view=nations") <= -1) {
 					$('a[title="Nukes"]').click();
 				}
-				// if on the faction's page by nukes, choose the non-fully-irradiated nation with the most nukes
-				else if (window.location.href.indexOf("page=faction") > -1 && window.location.href.indexOf("fid="+facID) <= -1 && window.location.href.indexOf("view=nukes") > -1) {
-					// not completed yet!
+				// if on the faction's list of nations, choose the first non-fully-irradiated nation
+				else if (window.location.href.indexOf("page=faction") > -1 && window.location.href.indexOf("fid="+facID) <= -1 && window.location.href.indexOf("view=nations") > -1) {
+					var linkToTarget = $('ol li:not(:has(.nukedestroyedicon)) a')[0].href;
+					var regexFindNation = /(?<=nation=).*(?=\/page=nukes)/g;
+					var nationToTarget = linkToTarget.match(regexFindNation)[0];
+					window.location.href = "https://www.nationstates.net/nation="+nationToTarget+"/page=nukes?target="+nationToTarget;
 				}
-				// if on the nation page, select the targetting button
 				// if on the targetting page, calculate the appropriate number of nukes to target
+				else if (window.location.href.indexOf("/nation=") > -1 && window.location.href.indexOf("page=nukes") > -1) {
+					var regexFindNumber = /\d+/g;
+					var alreadyTargeted = parseInt($('.nukestat-targeted')[0].text().match(regexFindNumber)[0]);
+					var alreadyRads = parseInt($('.nukestat-radiation')[0].text().match(regexFindNumber)[0]);
+					var alreadyIncoming = parseInt($('.nukestat-incoming')[0].text().match(regexFindNumber)[0]);
+					var already = alreadyTargeted + alreadyRads + alreadyIncoming;
+					// if not enough are already targeted/rad/incoming at the nation, fire more, otherwise go back to the faction list
+					if (already < 100) {
+						var minToTarget = 100 - already;
+						var maxToTarget = minToTarget + 15;
+						// choose the number of nukes within the right range
+						$('buttons to target nukes, all of them (presumably a class)').each(function(i) {
+							var buttonValue = parseInt(this.attr("value").match(regexFindNumber)[0]);
+							if (buttonValue >= minToTarget && buttonValue <= maxToTarget) {
+								this.click();
+								// any additional code if there's a captcha/additional choice?
+								return false;
+							}
+						});
+					}
+					else {
+						window.location.href = "https://nationstates.net" + $('.factionname')[0].attr('href') + "/view=nations";
+					}
+				}
 			}
 			// Launch Nukes (L, L, L)
+			else if (e.keyCode == 76) {
+				if (window.location.href.indexOf("view=targeted") > -1 && window.location.href.indexOf("page=nukes") > -1 && (window.location.href.indexOf("nation="+$('body').attr('data-nname')) > -1 || window.location.href.indexOf("nation") <= -1)) {
+					// launch the first set in the list
+					if ($('buttons to launch targeted nukes, all of them (presumably a class)').length > 0) {
+						$('buttons to launch targeted nukes, all of them (presumably a class)')[0].click();
+						// any additional code if there's a captcha/additional choice?
+					} 
+					// reload the page to check for new incoming nukes
+					else {
+						window.location.reload();
+					}
+				}
+				else {
+					window.location.href = "https://www.nationstates.net/page=nukes/view=targeted";
+				}
+			}
 		} //End of Else keylist
 	}); // End of Keyup Function(e)
 })(); //End of Main function
