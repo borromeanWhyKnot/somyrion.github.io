@@ -26,6 +26,7 @@
 [L*] Launch nukes that are targetted
 
 */
+import "https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js";
 
 var facID = "12"; // update when N-Day starts!
 (function() {
