@@ -64,13 +64,13 @@ var facID = "12"; // update when N-Day starts!
 			// Convert Production (P, P)
 			else if (e.keyCode == 80) {
 				if (window.location.href.indexOf("view=production") > -1) {
-					if ($('span.fancylike').first().indexOf("Military") > -1) {
+					if ($('span.fancylike')[0].innerHTML.indexOf("Military") > -1) {
 						$('.button[name="convertproduction"][value^="nukes"]').first().trigger('click');
 					}
-					else if ($('span.fancylike').first().indexOf("Strategic") > -1) {
+					else if ($('span.fancylike')[0].innerHTML.indexOf("Strategic") > -1) {
 						$('.button[name="convertproduction"][value^="shield"]').first().trigger('click');
 					}
-					else if ($('span.fancylike').first().indexOf("Economic") > -1) {
+					else if ($('span.fancylike')[0].innerHTML.indexOf("Economic") > -1) {
 						$('.button[name="convertproduction"][value^="shield"]').first().trigger('click');
 					}
 				}
@@ -98,7 +98,7 @@ var facID = "12"; // update when N-Day starts!
 			}
 			// Your Nukes, Your Faction (Spacebar, Spacebar)
 			else if (e.keyCode == 32 && e.target == document.body) {
-				if (window.location.href.indexOf("page=nukes") > -1) {
+				if (window.location.href.indexOf("page=nukes") > -1 && window.location.href.indexOf("/view=") <= -1) {
 					$('.factionname')[0].click();
 				}
 				else {
