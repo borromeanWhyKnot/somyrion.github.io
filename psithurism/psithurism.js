@@ -22,6 +22,7 @@
 [M*] View and shield incoming nukes
 [K*] Perform targetting procedure (from other faction page, choose nation and target it)
 [L*] Launch nukes that are targetted
+[F] Page listing all factions
 
 */
 
@@ -54,12 +55,16 @@ var facID = "12"; // update when N-Day starts!
 				return;
 			}	
 			// Go Back (<)
-			else if (e.keyCode == 188){
+			else if (e.keyCode == 188) {
 				window.history.back();
 			}
 			// Refresh (N)
-			else if (e.keyCode == 78){
+			else if (e.keyCode == 78) {
 				window.location.reload();
+			}
+			// Page listing all factions (F)
+			else if (e.keyCode == 70) {
+				window.location.href = "https://www.nationstates.net/page=factions";
 			}
 			// Convert Production (P, P)
 			else if (e.keyCode == 80) {
