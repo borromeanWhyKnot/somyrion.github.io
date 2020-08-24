@@ -55,13 +55,13 @@
 		</fieldset>
 		<fieldset>
 			<legend>Opinions</legend>
-			<button type="button" id="button-for-tsp" onclick="addNewOp('for', 'tsp');">+ Add a FOR Opinion from a TSP Citizen</button> <button type="button" onclick="$('#opinions-for-tsp').empty();">- Delete Last Opinion Box</button> 
+			<button type="button" id="button-for-tsp" onclick="addNewOp('for', 'tsp');">+ Add a FOR Opinion from a TSP Citizen</button> <button type="button" onclick="$('#opinions-for-tsp div:last-child').remove();">- Delete Last Opinion Box</button> 
 			<div id="opinions-for-tsp"></div>
-			<button type="button" id="button-for-world" onclick="addNewOp('for', 'world');">+ Add a FOR Opinion from the World</button> <button type="button" onclick="$('#opinions-for-world:last-child').remove();">- Delete Last Opinion Box</button> 
+			<button type="button" id="button-for-world" onclick="addNewOp('for', 'world');">+ Add a FOR Opinion from the World</button> <button type="button" onclick="$('#opinions-for-world div:last-child').remove();">- Delete Last Opinion Box</button> 
 			<div id="opinions-for-world"></div>
-			<button type="button" id="button-against-tsp" onclick="addNewOp('against', 'tsp');">+ Add an AGAINST Opinion from a TSP Citizen</button> <button type="button" onclick="$('#opinions-against-tsp:last-child').remove();">- Delete Last Opinion Box</button> 
+			<button type="button" id="button-against-tsp" onclick="addNewOp('against', 'tsp');">+ Add an AGAINST Opinion from a TSP Citizen</button> <button type="button" onclick="$('#opinions-against-tsp div:last-child').remove();">- Delete Last Opinion Box</button> 
 			<div id="opinions-against-tsp"></div>
-			<button type="button" id="button-against-world" onclick="addNewOp('against', 'world');">+ Add an AGAINST Opinion from the World</button> <button type="button" onclick="$('#opinions-against-world:last-child').remove();">- Delete Last Opinion Box</button> 
+			<button type="button" id="button-against-world" onclick="addNewOp('against', 'world');">+ Add an AGAINST Opinion from the World</button> <button type="button" onclick="$('#opinions-against-world div:last-child').remove();">- Delete Last Opinion Box</button> 
 			<div id="opinions-against-world"></div>
 		</fieldset>
 		<button type="button" id="generate-button" onclick="generate()">Generate</button><button type="button" id="reset" onclick="reset()">Reset</button>
