@@ -133,7 +133,7 @@ var facID = "12"; // update when N-Day starts!
 			else if (e.keyCode == 75) {
 				// if not on the faction's list of nations already, go to it
 				if (window.location.href.indexOf("page=faction") > -1 && window.location.href.indexOf("fid="+facID) <= -1 && window.location.href.indexOf("view=nations") <= -1) {
-					$('a.nukestat-nations').click();
+					$('a.nukestat-nations')[0].click();
 				}
 				// if on the faction's list of nations, choose the first non-fully-irradiated nation
 				else if (window.location.href.indexOf("page=faction") > -1 && window.location.href.indexOf("fid="+facID) <= -1 && window.location.href.indexOf("view=nations") > -1) {
