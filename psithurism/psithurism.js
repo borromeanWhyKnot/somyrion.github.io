@@ -37,7 +37,7 @@ var facID = "12"; // update when N-Day starts!
 		shifted = f.shiftKey;
         controlled = f.ctrlKey;
 		alternated = f.altKey;
-		// Stops the spacebar from scrolling when jumping to the reports page
+		// Stops the spacebar from scrolling
 		if (f.keyCode == 32 && f.target == document.body) {
 			f.preventDefault();
 			f.stopPropagation();
@@ -133,7 +133,7 @@ var facID = "12"; // update when N-Day starts!
 			else if (e.keyCode == 75) {
 				// if not on the faction's list of nations already, go to it
 				if (window.location.href.indexOf("page=faction") > -1 && window.location.href.indexOf("fid="+facID) <= -1 && window.location.href.indexOf("view=nations") <= -1) {
-					$('a[title="Nukes"]').click();
+					$('a.nukestat-nations').click();
 				}
 				// if on the faction's list of nations, choose the first non-fully-irradiated nation
 				else if (window.location.href.indexOf("page=faction") > -1 && window.location.href.indexOf("fid="+facID) <= -1 && window.location.href.indexOf("view=nations") > -1) {
