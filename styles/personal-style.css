@@ -1,50 +1,49 @@
 @import url('https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Source+Serif+Pro:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
-html {
-	background-image: url("/images/background.png");
-	background-size: cover;
+	.st0{fill:#009cac;}
+	.st1{fill:#7FC34E;}
+	.st2{fill:#3995D2;}
+	.st3{fill:#8D5EA7;}
+	.st4{fill:#FFFFFF;}
+	.st5{font-family:'Source Serif Pro'; font-style:italic;}
+	.st6{font-size:36px;}
+	.st7{font-family:'Source Serif Pro'; font-weight:800; font-style:italic;}
+	.st8{fill:none;stroke:#FFFFFF;stroke-width:2;stroke-miterlimit:10;}
+	.st9{font-family:'Fira Sans'; font-weight:300;}
+	.st10{font-size:90px;}
+	
+	rect.gradientrect {
+    fill: #945cbc;
+}
+
+html, body {
 	font-family: 'Fira Sans', sans-serif;
 	color: #444;
+	margin:0;
 }
 
-.box {
-	/* background: rgba(0, 0, 0, 0.3); */
-	text-align:center;
-	padding:50px;
-	position: fixed;
-	top: 50%;
-	left: 50%;
-	width:80%;
-	transform: translate(-50%, -50%);
-	border-radius: 10px;
-    /* box-shadow: 5px 5px rgba(0,0,0,0.1); */
-}
-
-#nametitle {
-	font-size: 8em;
-    font-weight: 300;
-	padding: 0 0 50px 0;
-	color:#fff;
-}
-
-#links li {
-	font-family: 'Source Serif Pro', serif;
-	font-size:2em;
-	display: inline-block;
-	padding: 0 30px;
-	font-style:italic;
-	text-transform: lowercase;
-}
-
-#links li a {
-	text-decoration: none;
-	color: #fff;
+* {
 	transition: .3s ease-in-out;
 }
 
-#links li a:hover {
+a {
+	text-decoration: none;
+	color: #fff;
+}
+
+a:hover {
 	color:#fff;
-	text-shadow: 0px 0px 3px #000;
+	text-shadow: 0px 0px 4px #000;
+}
+
+.st1:hover {
+	fill:#009cac;
+}
+.st2:hover {
+	fill:#006db7;
+}
+.st3:hover {
+	fill:#8252a1;
 }
 
 ::selection {
@@ -52,8 +51,7 @@ html {
 	color:#fff;
 }
 
-@media only screen and (orientation:portrait) {
-  html {
-    background: #009cac !important;
-  }
+svg {
+    width: 100%;
 }
+
