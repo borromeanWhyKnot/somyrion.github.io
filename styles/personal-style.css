@@ -53,7 +53,7 @@ html {
 }
 
 @media only screen and (orientation:portrait) {
-  body {
-    background: #009cac;
+  html {
+    background: #009cac !important;
   }
 }
