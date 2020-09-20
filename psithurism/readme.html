@@ -1,0 +1,107 @@
+<head>
+	<style>
+		body {
+			margin: 50px 10%;
+			font-family:'Avenir', 'Segoe UI', sans-serif;
+		}
+		h1, h2, h3 {
+			font-family: Avenir, Georgia, serif;
+			color:#096309;
+		}
+		a {
+			text-decoration:none;
+			color: #7fc350;
+		}
+		a:hover {
+			text-decoration:none;
+			color:#096309;
+		}
+		p {
+			line-spacing:1.2em;
+		}
+		table {
+			border-collapse:collapse;
+			margin: 25px 0;
+		}
+		td, th {
+			padding:10px;
+		}
+		td:first-of-type {
+			width:20%;
+		}
+		th {
+			background: #199bab;
+			color:#fff;
+		}
+		tr {
+			border-bottom: 2px solid #199bab;
+		}
+		.code {
+			font-family: Consolas, monospace;
+			background: #ddd;
+			padding:2px;
+			border-radius:2px;
+		}
+		.button {
+			text-align:center;
+			background:#7fc350;
+			border: 4px solid #096309;
+			font-size:1.5em;
+			padding:10px;
+			font-weight:bold;
+			color:#fff;
+			border-radius:10px;
+		}
+		.button:hover, .button:active {
+			background:#096309;
+			border: 4px solid #7fc350;
+			color:#fff;
+		}
+		hr {
+			border:none;
+			border-bottom: 2px solid #7fc350;
+			margin-top: -15px;
+			margin-bottom: 25px;
+		}
+		::selection {
+			color:#fff;
+			background:#7fc350;
+		}
+	</style>
+</head>
+
+<body>
+
+<h1>Psithurism Setup / Info</h1>
+
+<h2>Introduction</h2><hr></hr>
+
+<p><b>Psithurism</b> is a <i>keybinding</i> script (a derivative of <a href="https://chrome.google.com/webstore/detail/breeze%20%20/fmidibfpgbmcmnfedlafdfcbmglbckkf">Breeze++</a>) that has been built specifically for <a href="https://nationstates.net/region=the_potato_alliance">Potato Alliance</a> for N-Day. It takes actions that you would normally take with your mouse, like going to a certain page or clicking a button, and maps them to keys on your keyboard. </p>
+
+<p>For example, if you want to check if there are any incoming nukes on our faction, instead of having to find the right page and then click a button to shoot down anything incoming, you can simply press <span class="code">m</span> once (to go to the incoming nukes page), and then immediately <span class="code">m</span> again (to shoot down anything incoming, or reload the page to check for anything new otherwise). That means that instead of having to handle everything manually, you can simply do <span class="code">m, m, m, m, ...</span>. So much easier!</p>
+
+<h2>Install</h2><hr></hr>
+
+<ol><li>Psithurism is distributed as a <i>userscript</i> (a little bit of code that the user -- you -- add to your browser). This means that <b>you need to install the Tampermonkey (<a href="https://addons.mozilla.org/en-US/firefox/addon/tampermonkey/">Firefox</a> | <a href="https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo?hl=en">Chrome</a>) extension first in order to run it</b> (those extensions basically just allow you to add your own little bits of code to your browser).</li>
+<li>If you've previously installed <a href="https://chrome.google.com/webstore/detail/breeze%20%20/fmidibfpgbmcmnfedlafdfcbmglbckkf">Breeze++</a> or a similar extension, make sure to turn it off before using Psithurism! Otherwise, they will interfere with each other.</li>
+<li><b>Click the button below to install Psithurism.</b></li></ol>
+
+<p style="text-align:center; margin-top:10px;"><a href="https://raw.githubusercontent.com/Somyrion/somyrion.github.io/master/psithurism/psithurism.user.js" class="button">Click here to install</a></p>
+
+<h2>Functions (Keybinds)</h2><hr></hr>
+
+<p>Here's a list of all Psithurism's keybind functions:</p>
+
+<table><tr><th><b>Key (on your keyboard)</b></th><th><b>What does it do?</b></th></tr>
+<tr><td><span class="code">n</span></td><td><b>Reloads </b>any page you're on.</td></tr>
+<tr><td><span class="code"><</td><td>Goes back to the <b>previous page</b>.</td></tr>
+<tr><td><span class="code">p, p, p, ...</span></td><td><b>Convert production to nukes or shields</b> -- which one it chooses is based on specialty (military specialists' production is converted into nukes, both other specialties' production is converted into shields). You have to press it multiple times in a row to cycle through the production-generating process (going to the production page, selecting the right amount of production, etc.). Stop pressing it when you have no more production left to convert!</td></tr>
+<tr><td><span class="code">w, w, w, ...</span></td><td><b>Convert production to nukes only</b>. Don't use this unless there's some good reason why you need to generate nukes on an <url=https://www.nationstates.net/page=dispatch/id=874170>Economic or Strategic Specialist</url> nation!</td></tr>
+<tr><td><span class="code">s, s, s, ...</span></td><td><b>Convert production to shields only</b>. Don't use this unless there's some good reason why you need to generate nukes on a <url=https://www.nationstates.net/page=dispatch/id=874170>Military Specialist</url> nation!</td></tr>
+<tr><td><span class="code">spacebar, spacebar</span></td><td>Hit once to go to <url=https://www.nationstates.net/page=nukes><b>your nukes page</b></url>, twice to go to the Potato Alliance <b>faction page</b>.</td></tr>
+<tr><td><span class="code">m, m, m, ...</span></td><td>View (press once) and <b>shield </b>(press twice) <b>incoming nukes</b>, as described in the example above. If you're sitting on the incoming nukes page, waiting for anything to shoot down, just press it over and over and over. It'll keep reloading the page until there's something to shoot down, at which point it'll select the shield button immediately.</td></tr>
+<tr><td><span class="code">k, k, k, ...</span></td><td><b>Perform the entire targetting procedure</b>. You have to start on another faction's page (i.e. the faction that Potato Alliance is currently attacking). Then press it repeatedly to cycle through the process of automatically finding a not-fully-irradiated nation to target your nukes at, targetting the right number of nukes to make that nation reach 100% radiation, and then finding another nation to repeat the process. When you use this keybind to target your nukes, it will automatically calculate what the best number of nukes to target is, without wasting too many. Just keep pressing the key repeatedly until you run out of nukes to target!</td></tr>
+<tr><td><span class="code">L, L, L, ...</span></td><td>View (press once) and <b>launch </b>(press twice) <b>your nukes</b> that are targetted and ready to be launched. If you're waiting for your nukes to get ready to launch, just press it over and over. It'll keep reloading the page until there's something to shoot down, at which point it'll select the launch button immediately.</td></tr>
+<tr><td><span class="code">f</span></td><td>Go to the page that lists all the factions and the <b>scoreboard</b>.</td></tr></table>
+
+</body>
