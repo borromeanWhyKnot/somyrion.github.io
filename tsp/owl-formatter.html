@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf-8" />
+  <title>OWL Recommendation Auto-Formatter</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="styles/owl-style.css">
+  <link rel="icon" type="image/png" href="images/favicon-32x32.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="images/favicon-16x16.png" sizes="16x16" />
+ </head>
+ <body>
+ 
+    <h1>OWL Recommendation Auto-Formatter</h1>
+     
+    <form id="input">
+		<fieldset>
+			<legend>Proposal Info</legend>
+			Category:
+			<select id="category" name="category">
+				<option value="ga-res">GA Resolution</option>
+				<option value="ga-repeal">GA Repeal</option>
+				<option value="sc-commend-n">SC Commend Nation</option>
+				<option value="sc-condemn-n">SC Condemn Nation</option>
+				<option value="sc-commend-r">SC Commend Region</option>
+				<option value="sc-condemn-r">SC Condemn Region</option>
+				<option value="sc-liberate">SC Liberation</option>
+				<option value="sc-rep-commend-n">SC Repeal Commend Nation</option>
+				<option value="sc-rep-condemn-n">SC Repeal Condemn Nation</option>
+				<option value="sc-rep-commend-r">SC Repeal Commend Region</option>
+				<option value="sc-rep-condemn-r">SC Repeal Condemn Region</option>
+				<option value="sc-rep-liberate">SC Repeal Liberation</option>
+			</select>
+			<br>Proposal Target Nation/Region if SC OR Original Proposal Title (without "repeal"!) if GA:
+			<input type="text" id="target-title">
+			<br>Author:
+			<input type="text" id="author">
+			<br>Purpose:
+			<br><textarea id="purpose" style="height:100px;"></textarea>
+			<br>URL of on-site drafting thread:
+			<input type="text" id="onsite-thread">
+			<br>URL of TSP discussion thread:
+			<input type="text" id="tsp-thread">
+		</fieldset>
+		<fieldset>
+			<legend>OWL Position</legend>
+			OWL Position:
+			<select id="position" name="position">
+				<option value="for">For</option>
+				<option value="against">Against</option>
+				<option value="abstain">Abstain</option>
+				<option value="no-rec">No Recommendation</option>
+			</select>
+			<br>OWL Analysis (including any BBcode) (this should be a single paragraph) (will not be included if you selected "No Recommendation"):<br>
+			<textarea id="owl-position" style="height:200px;"></textarea>
+		</fieldset>
+		<fieldset>
+			<legend>Opinions</legend>
+			<button type="button" id="button-for-tsp" onclick="addNewOp('for', 'tsp');">+ Add a FOR Opinion from a TSP Citizen</button> <button type="button" onclick="$('#opinions-for-tsp div:last-child').remove();">- Delete Last Opinion Box</button> 
+			<div id="opinions-for-tsp"></div>
+			<button type="button" id="button-for-world" onclick="addNewOp('for', 'world');">+ Add a FOR Opinion from the World</button> <button type="button" onclick="$('#opinions-for-world div:last-child').remove();">- Delete Last Opinion Box</button> 
+			<div id="opinions-for-world"></div>
+			<button type="button" id="button-against-tsp" onclick="addNewOp('against', 'tsp');">+ Add an AGAINST Opinion from a TSP Citizen</button> <button type="button" onclick="$('#opinions-against-tsp div:last-child').remove();">- Delete Last Opinion Box</button> 
+			<div id="opinions-against-tsp"></div>
+			<button type="button" id="button-against-world" onclick="addNewOp('against', 'world');">+ Add an AGAINST Opinion from the World</button> <button type="button" onclick="$('#opinions-against-world div:last-child').remove();">- Delete Last Opinion Box</button> 
+			<div id="opinions-against-world"></div>
+		</fieldset>
+		<button type="button" id="generate-button" onclick="generate()">Generate</button><button type="button" id="reset" onclick="reset()">Reset</button>
+	</form>	
+	<hr />
+      
+    <p>Generated dispatch code: 
+    <div id="output"></div>
+    </p>
+ 
+    <script>
+        var generateButton = document.getElementById('generate-button');
+		function a(html) { $("#output").append(html); }
+        function generate() {
+			$("#output").empty();
+			a("<h2>Title</h2>");
+			// Determining the Organ
+			if ($("#category").val().indexOf("ga") > -1) {
+				a("GA Recommendation Dashboard: ");
+			} else {
+				a("SC Recommendation Dashboard: ");
+			}
+			// Determining the Position
+			if ($("#position").val() == "for") {
+				a("Vote FOR '");
+			} else if ($("#position").val() == "against") {
+				a("Vote AGAINST '");
+			} else if ($("#position").val() == "abstain") {
+				a("DON'T VOTE on '");
+			} else {
+				a("Opinions on '");
+			}
+			// Naming the Proposal
+			if ($("#category").val().indexOf("rep") > -1) {
+				a("Repeal ");
+			}
+			if ($("#category").val().indexOf("commend") > -1) {
+				a("Commend ");
+			} else if ($("#category").val().indexOf("condemn") > -1) {
+				a("Condemn ");
+			} else if ($("#category").val().indexOf("liberate") > -1) {
+				a("Liberate ");
+			}
+			a($("#target-title").val() + "' | OWL");
+			
+			a("<h2>Body Text</h2>");
+			a("[anchor=Top][/anchor][box][align=center]");
+			if ($("#position").val() == "for") {
+				a("[background-block=#00bb00][color=#00bb00].[/color][/background-block]");
+			} else if ($("#position").val() == "against") {
+				a("[background-block=#bb0000][color=#bb0000].[/color][/background-block]");
+			} else if ($("#position").val() == "abstain") {
+				a("[background-block=#bbbb00][color=#bbbb00].[/color][/background-block]");
+			} else {
+				a("[background-block=#bbbbbb][color=#bbbbbb].[/color][/background-block]");
+			}
+			a("<br>");
+			if ($("#category").val().indexOf("ga") > -1) {
+				a("[background-block=#0080C4][font=Avenir, Segoe UI][size=120]<br>[/size][size=300][background=#019AED][color=#019AED]—[/color][url=https://www.nationstates.net/page=dispatch/id=1333079][color=#FFFFFF][img]https://i.imgur.com/B3ICHz5.png[/img][/color][/url][color=#019AED]—[/color][/background][color=#0080C4]—[/color][url=https://www.nationstates.net/page=dispatch/id=1333073][color=#FFFFFF][img]https://i.imgur.com/XN0iIpi.png[/img][/color][/url][color=#0080C4]—[/color][/size][/font][/background-block]<br>[background-block=#019AED][size=200][color=#019AED]·[/color][/size]<br>[url=#Top][img]https://i.imgur.com/wYjv2h1.png[/img][/url]<br>[size=200][color=#019AED]·[/color][/size][/background-block]<br>[background-block=#0080C4][font=Avenir, Segoe UI][size=120][color=#0080C4]·[/color]<br>[color=#0080C4]—[/color][url=#background_information][color=#FFFFFF][img]https://i.imgur.com/v8IEqqf.png[/img][/color][/url][color=#0080C4]—[/color] [color=#FFFFFF] [/color] [color=#0080C4]—[/color][url=#recommendation][color=#FFFFFF][img]https://i.imgur.com/vgvfCZG.png[/img][/color][/url][color=#0080C4]—[/color] [color=#FFFFFF] [/color] [color=#0080C4]—[/color][url=#supplementary_opinions][color=#FFFFFF][img]https://i.imgur.com/RAKYOMO.png[/img][/color][/url][color=#0080C4]—[/color]<br>[/size][size=90][color=#0080C4]·[/color][/size]<br>[/font][/background-block][/align][/box]");
+			} else {
+				a("[background-block=#0080C4][font=Avenir, Segoe UI][size=120]<br>[/size][size=300][color=#0080C4]—[/color][url=https://www.nationstates.net/page=dispatch/id=1333079][color=#FFFFFF][img]https://i.imgur.com/cjwgsez.png[/img][/color][/url][color=#0080C4]—[/color][background=#019AED][color=#019AED]—[/color][url=https://www.nationstates.net/page=dispatch/id=1333073][color=#FFFFFF][img]https://i.imgur.com/Nl4c5JI.png[/img][/color][/url][color=#019AED]—[/color][/background][/size][/font][/background-block]<br>[background-block=#019AED][size=200][color=#019AED]·[/color][/size]<br>[url=#Top][img]https://i.imgur.com/wYjv2h1.png[/img][/url]<br>[size=200][color=#019AED]·[/color][/size][/background-block]<br>[background-block=#0080C4][font=Avenir, Segoe UI][size=120][color=#0080C4]·[/color]<br>[color=#0080C4]—[/color][url=#background_information][color=#FFFFFF][img]https://i.imgur.com/v8IEqqf.png[/img][/color][/url][color=#0080C4]—[/color] [color=#FFFFFF] [/color] [color=#0080C4]—[/color][url=#recommendation][color=#FFFFFF][img]https://i.imgur.com/vgvfCZG.png[/img][/color][/url][color=#0080C4]—[/color] [color=#FFFFFF] [/color] [color=#0080C4]—[/color][url=#supplementary_opinions][color=#FFFFFF][img]https://i.imgur.com/RAKYOMO.png[/img][/color][/url][color=#0080C4]—[/color]<br>[/size][size=90][color=#0080C4]·[/color][/size]<br>[/font][/background-block][/align][/box]");
+			}
+			a("<br><br>[box][anchor=background_information][/anchor]<br>[background-block=#019AED][url=#Top][img]https://i.imgur.com/2F5PXmd.png[/img][/url]<br>[align=center][img]https://i.imgur.com/vibIm54.png[/img]<br>[font=Avenir, Segoe UI][size=300][color=#FFFFFF][i][b]");
+			if ($("#category").val().indexOf("rep") > -1) {
+				a("Repeal ");
+			}
+			if ($("#category").val().indexOf("commend") > -1) {
+				a("'Commend ");
+			} else if ($("#category").val().indexOf("condemn") > -1) {
+				a("'Condemn ");
+			} else if ($("#category").val().indexOf("liberate") > -1) {
+				a("'Liberate ");
+			} else if ($("#category").val().indexOf("ga") > -1) {
+				a("'");
+			}
+			a($("#target-title").val() + "'");
+			a("[/b][/i][/color][/size][/font]<br>[color=#019AED]·[/color][/align][/background-block]<br>[background-block=#38b9ff][align=center][font=Avenir, Segoe UI][size=90][color=#38b9ff]·[/color][/size]<br>");
+			if ($("#category").val().indexOf("ga") > -1) {
+				a("[size=300][color=#38b9ff]—[/color][url=page=ga][background=#ff9900][color=#ff9900].[/color][color=#FFFFFF][img]https://i.imgur.com/60Sy8CX.png[/img][/color][color=#ff9900].[/color][/background][/url][color=#38b9ff]—[/color]<br>[/size][size=90][color=#38b9ff]·[/color][/size]<br>[/font][/background-block][/align]");
+			} else {
+				a("[size=300][color=#38b9ff]—[/color][url=page=sc][background=#ff9900][color=#ff9900].[/color][color=#FFFFFF][img]https://i.imgur.com/60Sy8CX.png[/img][/color][color=#ff9900].[/color][/background][/url][color=#38b9ff]—[/color]<br>[/size][size=90][color=#38b9ff]·[/color][/size]<br>[/font][/background-block][/align]");
+			}
+			a("<br><br>[align=justify][font=Avenir, Segoe UI][size=250][color=#019AED][b]Background Information[/b][/color][/size][/font][/align]<br><br>[align=justify][font=Avenir, Segoe UI][size=120][color=#019AED][b]Proposal title:[/b][/color] [i]");
+			if ($("#category").val().indexOf("rep") > -1) {
+				a("Repeal ");
+			}	
+			if ($("#category").val().indexOf("commend") > -1) {
+				a("'Commend ");
+			} else if ($("#category").val().indexOf("condemn") > -1) {
+				a("'Condemn ");
+			} else if ($("#category").val().indexOf("liberate") > -1) {
+				a("'Liberate ");
+			}
+			if ($("#category").val().indexOf("commend-r") > -1 || $("#category").val().indexOf("condemn-r") > -1 || $("#category").val().indexOf("liberate") > -1) {
+				a("[region]" + $("#target-title").val() + "[/region]'");
+			} else if ($("#category").val().indexOf("-n") > -1) {
+				a("[nation]" + $("#target-title").val() + "[/nation]'");
+			} else if ($("#category").val().indexOf("ga") > -1) {
+				a("'" + $("#target-title").val() + "'");
+			}
+			a("[/i]<br>[color=#019AED][b]Author:[/b][/color] [nation]" + $("#author").val() + "[/nation]<br>[color=#019AED][b]Purpose:[/b][/color] ");
+			a($("#purpose").val() + "[/size][/font][/align]<br><br>[align=justify][font=Avenir, Segoe UI][size=140][color=#019AED][b]Links[/b][/color][/size][/font][/align]<br><br>[align=justify][font=Avenir, Segoe UI][size=120][url=");
+			a($("#onsite-thread").val() + "][color=#FF9900][b]On-site drafting forum thread[/b][/color][/url]<br>[url=" + $("#tsp-thread").val());
+			a("][color=#FF9900][b]Join the discussion on OWL's message board![/b][/color][/url][/size][/font][/align][/box]<br><br>[box][anchor=recommendation][/anchor]<br>[background-block=#019AED][url=#Top][img]https://i.imgur.com/2F5PXmd.png[/img][/url]<br>[align=center][img]https://i.imgur.com/IEt9MQy.png[/img]<br>[font=Avenir, Segoe UI][size=300]");
+			if ($("#position").val() == "for") {
+				a("[color=#FFFFFF]Vote [/color][background=#00bb00][color=#00bb00].[/color][color=#ffffff][B]For[/b][/color][color=#00bb00].[/color][/background][/size][/font]<br>[color=#019AED]·[/color][/align][/background-block]");
+			} else if ($("#position").val() == "against") {
+				a("[color=#FFFFFF]Vote [/color][background=#bb0000][color=#bb0000].[/color][color=#ffffff][B]Against[/b][/color][color=#bb0000].[/color][/background][/size][/font]<br>[color=#019AED]·[/color][/align][/background-block]");
+			} else if ($("#position").val() == "abstain") {
+				a("[background=#bbbb00][color=#bbbb00].[/color][color=#ffffff][B]Don't Vote[/b][/color][color=#bbbb00].[/color][/background][/size][/font]<br>[color=#019AED]·[/color][/align][/background-block]");
+			} else {
+				a("[background=#bbbbbb][color=#bbbbbb].[/color][color=#ffffff][B]No Recommendation[/b][/color][color=#bbbbbb].[/color][/background][/size][/font]<br>[color=#019AED]·[/color][/align][/background-block]");
+			}
+			a("<br><br>[anchor=analysis][/anchor][align=justify][font=Avenir, Segoe UI][size=250][color=#019AED][b]The Office's Analysis[/b][/color][/size][/font][/align]<br><br>[align=justify][font=Avenir, Segoe UI][size=120]");
+			a($("#owl-position").val() + "[/size][/font][/align][/box]");
+			a("<br><br>[box][anchor=supplementary_opinions][/anchor]<br>[background-block=#019AED][url=#Top][img]https://i.imgur.com/2F5PXmd.png[/img][/url]<br>[align=center][font=Avenir, Segoe UI][size=300][color=#FFFFFF][b]Supplementary Opinions[/b][/color][/size][/font]<br>[color=#019AED]·[/color][/align][/background-block]<br>[background-block=#38b9ff][align=center][font=Avenir, Segoe UI][size=120][color=#38b9ff]·[/color]<br>[color=#38b9ff]—[/color][url=#for][color=#FFFFFF][b]FOR[/b][/color][/url][color=#38b9ff]—[/color] [color=#FFFFFF]|[/color] [color=#38b9ff]—[/color][url=#against][color=#FFFFFF][b]AGAINST[/b][/color][/url][color=#38b9ff]—[/color]<br>[color=#38b9ff]·[/color]<br>[/size][/font][/background-block][/align]<br><br>[anchor=for][/anchor][align=justify][font=Avenir, Segoe UI][size=250][color=#019AED][b]For[/b][/color][/size][/font][/align]<br><br>[align=justify][font=Avenir, Segoe UI][size=140][color=#019AED][b]From TSP Citizens[/b][/color][/size][/font][/align]<br><br>");
+			if ($("#opinions-for-tsp > div").length <= 0) {
+				a("[align=justify][font=Avenir, Segoe UI][size=120][i]At the time of writing, OWL had not found a solid opinion for the resolution from TSP citizens. You can make your own opinion heard by posting it on the [url=region=the_south_pacific_wa_voting_center][color=#ff9900][b]Regional Message Board of the WA Voting Center[/b][/color][/url]![/i][/size][/font][/align]<br><br>");
+			} else {
+				$("#opinions-for-tsp > div").each(		function(index) {
+					a("[align=justify][font=Avenir, Segoe UI][size=120][i]" + $(this).find("textarea:first-of-type").val());
+					a("[/i]<br><br>[quote=" + $(this).find("input:first-of-type").val() + ";");
+					if ($(this).find("input:last-of-type").val().includes("postid=")) {
+						a($(this).find("input:last-of-type").val().split("postid=")[1]);
+					} else if ($(this).find("input:last-of-type").val()) {
+						a($(this).find("input:last-of-type").val());
+					} else {
+						a("0");
+					}
+					a("]" + $(this).find("textarea:last-of-type").val() + "[/quote][/size][/font][/align]<br><br>");
+				});
+			}
+			a("[align=justify][font=Avenir, Segoe UI][size=140][color=#019AED][b]From the World[/b][/color][/size][/font][/align]<br><br>");
+			if ($("#opinions-for-world > div").length <= 0) {
+				a("[align=justify][font=Avenir, Segoe UI][size=120][i]At the time of writing, OWL had not found a solid opinion for the resolution from the rest of the world. You can make your own opinion heard by posting it on the [url=region=the_south_pacific_wa_voting_center][color=#ff9900][b]Regional Message Board of the WA Voting Center[/b][/color][/url]![/i][/size][/font][/align]<br><br>");
+			} else {
+				$("#opinions-for-world > div").each(		function(index) {
+					a("[align=justify][font=Avenir, Segoe UI][size=120][i]" + $(this).find("textarea:first-of-type").val());
+					a("[/i]<br><br>[quote=" + $(this).find("input:first-of-type").val() + ";");
+					if ($(this).find("input:last-of-type").val().includes("postid=")) {
+						a($(this).find("input:last-of-type").val().split("postid=")[1]);
+					} else if ($(this).find("input:last-of-type").val()) {
+						a($(this).find("input:last-of-type").val());
+					} else {
+						a("0");
+					}
+					a("]" + $(this).find("textarea:last-of-type").val() + "[/quote][/size][/font][/align]<br><br>");
+				});
+			}
+			a("[anchor=against][/anchor][align=justify][font=Avenir, Segoe UI][size=250][color=#019AED][b]Against[/b][/color][/size][/font][/align]<br><br>[align=justify][font=Avenir, Segoe UI][size=140][color=#019AED][b]From TSP Citizens[/b][/color][/size][/font][/align]<br><br>");
+			if ($("#opinions-against-tsp > div").length <= 0) {
+				a("[align=justify][font=Avenir, Segoe UI][size=120][i]At the time of writing, OWL had not found a solid opinion against the resolution from TSP citizens. You can make your own opinion heard by posting it on the [url=region=the_south_pacific_wa_voting_center][color=#ff9900][b]Regional Message Board of the WA Voting Center[/b][/color][/url]![/i][/size][/font][/align]<br><br>");
+			} else {
+				$("#opinions-against-tsp > div").each(		function(index) {
+					a("[align=justify][font=Avenir, Segoe UI][size=120][i]" + $(this).find("textarea:first-of-type").val());
+					a("[/i]<br><br>[quote=" + $(this).find("input:first-of-type").val() + ";");
+					if ($(this).find("input:last-of-type").val().includes("postid=")) {
+						a($(this).find("input:last-of-type").val().split("postid=")[1]);
+					} else if ($(this).find("input:last-of-type").val()) {
+						a($(this).find("input:last-of-type").val());
+					} else {
+						a("0");
+					}
+					a("]" + $(this).find("textarea:last-of-type").val() + "[/quote][/size][/font][/align]<br><br>");
+				});
+			}
+			a("[align=justify][font=Avenir, Segoe UI][size=140][color=#019AED][b]From the World[/b][/color][/size][/font][/align]<br><br>");
+			if ($("#opinions-against-world > div").length <= 0) {
+				a("[align=justify][font=Avenir, Segoe UI][size=120][i]At the time of writing, OWL had not found a solid opinion against the resolution from the rest of the world. You can make your own opinion heard by posting it on the [url=region=the_south_pacific_wa_voting_center][color=#ff9900][b]Regional Message Board of the WA Voting Center[/b][/color][/url]![/i][/size][/font][/align]<br><br>");
+			} else {
+				$("#opinions-against-world > div").each(		function(index) {
+					a("[align=justify][font=Avenir, Segoe UI][size=120][i]" + $(this).find("textarea:first-of-type").val());
+					a("[/i]<br><br>[quote=" + $(this).find("input:first-of-type").val() + ";");
+					if ($(this).find("input:last-of-type").val().includes("postid=")) {
+						a($(this).find("input:last-of-type").val().split("postid=")[1]);
+					} else if ($(this).find("input:last-of-type").val()) {
+						a($(this).find("input:last-of-type").val());
+					} else {
+						a("0");
+					}
+					a("]" + $(this).find("textarea:last-of-type").val() + "[/quote][/size][/font][/align]<br><br>");
+				});
+			}
+			a("[/box]<br><br>[box][align=center][background-block=#38b9ff][font=Avenir, Segoe UI][size=120]<br>[img]https://i.imgur.com/iRH09IS.png?1[/img]<br>[color=#38b9ff]·[/color][/size][/font][/background-block][background-block=#019aed][font=Avenir, Segoe UI][size=120][color=#019aed]—[/color]<br>[color=#019aed]—[/color][url=https://www.nationstates.net/page=dispatch/id=1396505][color=#FFFFFF][b]WELCOME[/b][/color][/url][color=#019aed]—[/color] [color=#019aed]—[/color][url=https://www.nationstates.net/page=dispatch/id=1385515][color=#FFFFFF][b]BEGINNER'S GUIDE[/b][/color][/url][color=#019aed]—[/color] [color=#019aed]—[/color][url=https://www.nationstates.net/page=dispatch/id=1389438][color=#FFFFFF][b]WRITING GUIDE[/b][/color][/url][color=#019aed]—[/color] [color=#019aed]—[/color][url=region=the_south_pacific_wa_voting_center][color=#FFFFFF][b]VOTING CENTER[/b][/color][/url][color=#019aed]—[/color] [color=#019aed]—[/color][url=https://discord.gg/xUrNE7k][color=#FFFFFF][b]DISCORD[/b][/color][/url][color=#019aed]—[/color]<br>[color=#019aed]—[/color][/size][/font][/align][/background-block]<br>[align=center][background-block=#0080c4][font=Avenir, Segoe UI][size=120]<br>[img]https://i.imgur.com/FXyrp5C.png[/img]<br>[color=#0080c4]·[/color][/size][/font][/background-block][background-block=#0068a0]<br>[color=#0068a0]·[/color]<br>[url=https://www.nationstates.net/region=the_south_pacific][img]https://i.imgur.com/NYenHvV.png[/img][/url][color=#0068a0]—[/color][url=https://discord.gg/tEyyDyh][img]https://i.imgur.com/JyO4OrT.png[/img][/url][color=#0068a0]—[/color][url=https://tspforums.xyz/][img]https://i.imgur.com/SEpkSix.png[/img][/url]<br>[color=#0068a0]·[/color]<br>[color=#0068a0]·[/color]<br>[/background-block][/align][/box]");
+        };
+		function reset() {
+			$('#input').reset();
+			$('#output').empty();
+		} 
+	</script>
+	<script>
+		var totalForTSP = 0;
+		var totalForWorld = 0;
+		var totalAgainstTSP = 0;
+		var totalAgainstWorld = 0;
+		var forTSPSup = document.getElementById("opinions-for-tsp");
+		var forWorldSup = document.getElementById("opinions-for-world");
+		var againstTSPSup = document.getElementById("opinions-against-tsp");
+		var againstWorldSup = document.getElementById("opinions-against-world");
+		function addNewOp(side, from) {
+			var input = document.createElement("textarea");
+			input.style = "width:1000px; height:50px;";
+			var input2 = document.createElement("textarea");
+			input2.style = "width:1000px; height:200px;";
+			var rmb = document.createElement("input");
+			rmb.type = "text";
+			var nation = document.createElement("input");
+			nation.type = "text";
+			if (side == "for") {
+				if (from == "tsp") {
+					totalForTSP++;
+					forTSP = forTSPSup.appendChild(document.createElement("div"));
+					forTSP.id = "for-tsp-" + totalForTSP;
+					forTSP.appendChild(document.createTextNode("FOR Opinion from a TSP Citizen " + totalForTSP));
+					forTSP.appendChild(document.createElement("br"));
+					forTSP.appendChild(document.createTextNode("Nation: "));
+					forTSP.appendChild(nation);
+					forTSP.appendChild(document.createTextNode("Paste RMB post link or post ID here if from a RMB post: "));
+					forTSP.appendChild(rmb);
+					forTSP.appendChild(document.createElement("br"));
+					forTSP.appendChild(document.createTextNode('Intro text (e.g. "[nation]Aumeltopia[/nation] is the Delegate of the South Pacific. He posted the following on TSP\'s forums:"):'));
+					forTSP.appendChild(document.createElement("br"));
+					input.id = "intro-for-tsp-" + totalForTSP;
+					forTSP.appendChild(input);
+					forTSP.appendChild(document.createElement("br"));
+					forTSP.appendChild(document.createTextNode('Quote:'));
+					forTSP.appendChild(document.createElement("br"));
+					input2.id = "opinion-for-tsp-" + totalForTSP;
+					forTSP.appendChild(input2);
+					forTSP.appendChild(document.createElement("br"));
+				} else {
+					totalForWorld++;
+					forWorld = forWorldSup.appendChild(document.createElement("div"));
+					forWorld.id = "for-world-" + totalForWorld;
+					forWorld.appendChild(document.createTextNode("FOR Opinion from the World " + totalForWorld));
+					forWorld.appendChild(document.createElement("br"));
+					forWorld.appendChild(document.createTextNode("Nation: "));
+					forWorld.appendChild(nation);
+					forWorld.appendChild(document.createTextNode("Paste RMB post ID here if from a RMB post: "));
+					forWorld.appendChild(rmb);
+					forWorld.appendChild(document.createElement("br"));
+					forWorld.appendChild(document.createTextNode('Intro text (e.g. "[nation]Aumeltopia[/nation] is the Delegate of the South Pacific. He posted the following on TSP\'s forums:"):'));
+					forWorld.appendChild(document.createElement("br"));
+					input.id = "intro-for-world-" + totalForWorld;
+					forWorld.appendChild(input);
+					forWorld.appendChild(document.createElement("br"));
+					forWorld.appendChild(document.createTextNode('Quote:'));
+					forWorld.appendChild(document.createElement("br"));
+					input2.id = "opinion-for-world-" + totalForWorld;
+					forWorld.appendChild(input2);
+					forWorld.appendChild(document.createElement("br"));
+				}
+			} else {
+				if (from == "tsp") {
+					totalAgainstTSP++;
+					againstTSP = againstTSPSup.appendChild(document.createElement("div"));
+					againstTSP.id = "against-tsp-" + totalAgainstTSP;
+					againstTSP.appendChild(document.createTextNode("AGAINST Opinion from a TSP Citizen " + totalAgainstTSP));
+					againstTSP.appendChild(document.createElement("br"));
+					againstTSP.appendChild(document.createTextNode("Nation: "));
+					againstTSP.appendChild(nation);
+					againstTSP.appendChild(document.createTextNode("Paste RMB post ID here if from a RMB post: "));
+					againstTSP.appendChild(rmb);
+					againstTSP.appendChild(document.createElement("br"));
+					againstTSP.appendChild(document.createTextNode('Intro text (e.g. "[nation]Aumeltopia[/nation] is the Delegate of the South Pacific. He posted the following on TSP\'s forums:"):'));
+					againstTSP.appendChild(document.createElement("br"));
+					input.id = "intro-against-tsp-" + totalAgainstTSP;
+					againstTSP.appendChild(input);
+					againstTSP.appendChild(document.createElement("br"));
+					againstTSP.appendChild(document.createTextNode('Quote:'));
+					againstTSP.appendChild(document.createElement("br"));
+					input2.id = "opinion-against-tsp-" + totalAgainstTSP;
+					againstTSP.appendChild(input2);
+					againstTSP.appendChild(document.createElement("br"));
+				} else {
+					totalAgainstWorld++;
+					againstWorld = againstWorldSup.appendChild(document.createElement("div"));
+					againstWorld.id = "against-world-" + totalAgainstWorld;
+					againstWorld.appendChild(document.createTextNode("AGAINST Opinion from the World " + totalAgainstWorld));
+					againstWorld.appendChild(document.createElement("br"));
+					againstWorld.appendChild(document.createTextNode("Nation: "));
+					againstWorld.appendChild(nation);
+					againstWorld.appendChild(document.createTextNode("Paste RMB post ID here if from a RMB post: "));
+					againstWorld.appendChild(rmb);
+					againstWorld.appendChild(document.createElement("br"));
+					againstWorld.appendChild(document.createTextNode('Intro text (e.g. "[nation]Aumeltopia[/nation] is the Delegate of the South Pacific. He posted the following on TSP\'s forums:"):'));
+					againstWorld.appendChild(document.createElement("br"));
+					input.id = "intro-against-world-" + totalAgainstWorld;
+					againstWorld.appendChild(input);
+					againstWorld.appendChild(document.createElement("br"));
+					againstWorld.appendChild(document.createTextNode('Quote:'));
+					againstWorld.appendChild(document.createElement("br"));
+					input2.id = "opinion-against-world-" + totalAgainstWorld;
+					againstWorld.appendChild(input2);
+					againstWorld.appendChild(document.createElement("br"));
+				}
+			}
+		}
+    </script>
+  </body>
+</html>
