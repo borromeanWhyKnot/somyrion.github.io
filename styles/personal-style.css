@@ -48,6 +48,12 @@ html {
 }
 
 ::selection {
-	background:#945cbc;
+	background: #8252a1fe;
 	color:#fff;
+}
+
+@media only screen and (orientation:portrait) {
+  body {
+    background: #009cac;
+  }
 }
