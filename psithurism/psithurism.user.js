@@ -185,6 +185,10 @@ var facID = "12"; // update when N-Day starts!
 					window.location.href = "https://www.nationstates.net/page=nukes/view=targeted";
 				}
 			}
+			// Go to Puppet Login (\) 
+			else if (e.keyCode == 220) {
+				window.location.href = "https://www.nationstates.net/page=blank/puppetlist";
+			}
 		} //End of Else keylist
 	}); // End of Keyup Function(e)
 })(); //End of Main function
