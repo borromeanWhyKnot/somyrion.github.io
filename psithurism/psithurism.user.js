@@ -68,7 +68,7 @@ var facID = "12"; // update when N-Day starts!
 			}
 			// Convert Production (P, P)
 			else if (e.keyCode == 80) {
-				if (window.location.href.indexOf("view=production") > -1 && window.location.href.indexOf("page=nukes") > -1 && (window.location.href.indexOf("nation="+$('body').attr('data-nname')) > -1 || window.location.href.indexOf("nation") <= -1)) {
+				if (window.location.href.indexOf("view=production") > -1 && window.location.href.indexOf("page=nukes") > -1 && (window.location.href.indexOf("nation="+$('body').attr('data-nname')) > -1 || window.location.href.indexOf("/nation=") <= -1)) {
 					if ($('span.fancylike')[0].text().indexOf("Military") > -1) {
 						$('.button[name="convertproduction"][value^="nukes"]').first().trigger('click');
 					}
@@ -85,7 +85,7 @@ var facID = "12"; // update when N-Day starts!
 			}
 			// Convert Production to Nukes (W, W)
 			else if (e.keyCode == 87) {
-				if (window.location.href.indexOf("view=production") > -1 && window.location.href.indexOf("page=nukes") > -1 && (window.location.href.indexOf("nation="+$('body').attr('data-nname')) > -1 || window.location.href.indexOf("nation") <= -1)) {
+				if (window.location.href.indexOf("view=production") > -1 && window.location.href.indexOf("page=nukes") > -1 && (window.location.href.indexOf("nation="+$('body').attr('data-nname')) > -1 || window.location.href.indexOf("/nation=") <= -1)) {
 					$('.button[name="convertproduction"][value^="nukes"]').first().trigger('click');
 				}
 				else {
@@ -94,7 +94,7 @@ var facID = "12"; // update when N-Day starts!
 			}
 			// Convert Production to Shields (S, S)
 			else if (e.keyCode == 83) {
-				if (window.location.href.indexOf("view=production") > -1 && window.location.href.indexOf("page=nukes") > -1 && (window.location.href.indexOf("nation="+$('body').attr('data-nname')) > -1 || window.location.href.indexOf("nation") <= -1)) {
+				if (window.location.href.indexOf("view=production") > -1 && window.location.href.indexOf("page=nukes") > -1 && (window.location.href.indexOf("nation="+$('body').attr('data-nname')) > -1 || window.location.href.indexOf("/nation=") <= -1)) {
 					$('.button[name="convertproduction"][value^="shield"]').first().trigger('click');
 				}
 				else {
@@ -103,7 +103,7 @@ var facID = "12"; // update when N-Day starts!
 			}
 			// Your Nukes, Your Faction (Spacebar, Spacebar)
 			else if (e.keyCode == 32 && e.target == document.body) {
-				if (window.location.href.indexOf("page=nukes") > -1 && window.location.href.indexOf("/view=") <= -1 && (window.location.href.indexOf("nation="+$('body').attr('data-nname')) > -1 || window.location.href.indexOf("nation") <= -1)) {
+				if (window.location.href.indexOf("page=nukes") > -1 && window.location.href.indexOf("/view=") <= -1 && (window.location.href.indexOf("nation="+$('body').attr('data-nname')) > -1 || window.location.href.indexOf("/nation=") <= -1)) {
 					$('.factionname')[0].click();
 				}
 				else {
@@ -170,7 +170,7 @@ var facID = "12"; // update when N-Day starts!
 			}
 			// Launch Nukes (L, L, L)
 			else if (e.keyCode == 76) {
-				if (window.location.href.indexOf("view=targeted") > -1 && window.location.href.indexOf("page=nukes") > -1 && (window.location.href.indexOf("nation="+$('body').attr('data-nname')) > -1 || window.location.href.indexOf("nation") <= -1)) {
+				if (window.location.href.indexOf("view=targeted") > -1 && window.location.href.indexOf("page=nukes") > -1 && (window.location.href.indexOf("nation="+$('body').attr('data-nname')) > -1 || window.location.href.indexOf("/nation=") <= -1)) {
 					// launch the first set in the list
 					if ($('buttons to launch targeted nukes, all of them (presumably a class)').length > 0) {
 						$('buttons to launch targeted nukes, all of them (presumably a class)')[0].click();
