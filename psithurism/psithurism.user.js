@@ -69,13 +69,13 @@ var facID = "12"; // update when N-Day starts!
 			// Convert Production (P, P)
 			else if (e.keyCode == 80) {
 				if (window.location.href.indexOf("view=production") > -1 && window.location.href.indexOf("page=nukes") > -1 && (window.location.href.indexOf("nation="+$('body').attr('data-nname')) > -1 || window.location.href.indexOf("/nation=") <= -1)) {
-					if ($('span.fancylike')[0].text().indexOf("Military") > -1) {
+					if ($('span.fancylike').text().indexOf("Military") > -1) {
 						$('.button[name="convertproduction"][value^="nukes"]').first().trigger('click');
 					}
-					else if ($('span.fancylike')[0].text().indexOf("Strategic") > -1) {
+					else if ($('span.fancylike').text().indexOf("Strategic") > -1) {
 						$('.button[name="convertproduction"][value^="shield"]').first().trigger('click');
 					}
-					else if ($('span.fancylike')[0].text().indexOf("Economic") > -1) {
+					else if ($('span.fancylike').text().indexOf("Economic") > -1) {
 						$('.button[name="convertproduction"][value^="shield"]').first().trigger('click');
 					}
 				}
@@ -145,9 +145,9 @@ var facID = "12"; // update when N-Day starts!
 				// if on the targetting page, calculate the appropriate number of nukes to target
 				else if (window.location.href.indexOf("/nation=") > -1 && window.location.href.indexOf("page=nukes") > -1) {
 					var regexFindNumber = /\d+/g;
-					var alreadyTargeted = parseInt($('.nukestat-targeted')[0].text().match(regexFindNumber)[0]);
-					var alreadyRads = parseInt($('.nukestat-radiation')[0].text().match(regexFindNumber)[0]);
-					var alreadyIncoming = parseInt($('.nukestat-incoming')[0].text().match(regexFindNumber)[0]);
+					var alreadyTargeted = parseInt($('.nukestat-targeted').text().match(regexFindNumber)[0]);
+					var alreadyRads = parseInt($('.nukestat-radiation').text().match(regexFindNumber)[0]);
+					var alreadyIncoming = parseInt($('.nukestat-incoming').text().match(regexFindNumber)[0]);
 					var already = alreadyTargeted + alreadyRads + alreadyIncoming;
 					// if not enough are already targeted/rad/incoming at the nation, fire more, otherwise go back to the faction list
 					if (already < 100) {
