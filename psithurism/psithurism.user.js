@@ -150,12 +150,11 @@ var facID = "21"; // update when N-Day starts!
 					var alreadyIncoming = parseInt($('.nukestat-incoming').text().match(regexFindNumber)[0]);
 					var already = alreadyTargeted + alreadyRads + alreadyIncoming;
 					// if not enough are already targeted/rad/incoming at the nation, fire more, otherwise go back to the faction list
-					if (already < 100) {
+					if (already < 100 && $('.button[name="nukes"]').length > 0) {
 						var minToTarget = 100 - already;
 						var maxToTarget = minToTarget + 15;
 						// choose the number of nukes within the right range
 						$('.button[name="nukes"]').each(function(i) {
-							
 							var buttonValue = parseInt($(this).attr("value"));
 							if (buttonValue <= maxToTarget) {
 								var currentWindow = window.location.href;
@@ -166,7 +165,7 @@ var facID = "21"; // update when N-Day starts!
 						});
 					}
 					else {
-						window.location.href = "https://nationstates.net" + $('.factionname')[0].attr('href') + "/view=nations";
+						window.location.href = "https://nationstates.net" + $('.factionname').attr('href') + "/view=nations";
 					}
 				}
 			}
