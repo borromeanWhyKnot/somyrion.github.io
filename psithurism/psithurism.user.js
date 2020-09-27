@@ -1,11 +1,11 @@
 // ==UserScript==
 // @name         Psithurism.user.js
 // @namespace    http://tampermonkey.net/
-// @version      0.1.1
-// @description  Hotkeys for the N-Day Potato Alliance, based on NSBreeze++
-// @author       Somyrion
+// @version      0.1.3
+// @description  Hotkeys for the N-Day A.T.O.M.I.C, based on NSBreeze++
+// @author       Somyrion, Freg#7085, and borromeanWhyKnot (Evrigenis)
 // @match        https://www.nationstates.net/*
-// @updateURL    https://github.com/Somyrion/somyrion.github.io/raw/master/psithurism/psithurism.user.js
+// @updateURL    https://github.com/borromeanWhyKnot/somyrion.github.io/raw/master/psithurism/psithurism.user.js
 // @require      https://code.jquery.com/jquery-3.5.1.min.js
 // @grant        none
 // ==/UserScript==
@@ -28,7 +28,7 @@
 
 /* global $ */
 
-var facID = "21"; // update when N-Day starts!
+var facID = "54"; // update when N-Day starts!
 (function() {
 	var shifted = false;
 	var controlled = false;
@@ -53,7 +53,7 @@ var facID = "21"; // update when N-Day starts!
 			if ($("input,textarea").is(":focus")){
 			// Psithurism will not activate if you are typing in a text field
 				return;
-			}	
+			}
 			// Go Back (<)
 			else if (e.keyCode == 188) {
 				window.history.back();
@@ -118,7 +118,7 @@ var facID = "21"; // update when N-Day starts!
 					if ($('.button[name="defend"]').length > 0) {
 						$('.button[name="defend"]')[0].click();
 						// any additional code if there's a captcha/additional choice?
-					} 
+					}
 					// reload the page to check for new incoming nukes
 					else {
 						window.location.reload();
@@ -165,6 +165,7 @@ var facID = "21"; // update when N-Day starts!
 						});
 					}
 					else {
+                        // moves to the faction's nation list otherwise
 						window.location.href = "https://nationstates.net" + $('.factionname').attr('href') + "/view=nations";
 					}
 				}
@@ -176,7 +177,7 @@ var facID = "21"; // update when N-Day starts!
 					if ($('.button[name="launch"]').length > 0) {
 						$('.button[name="launch"]')[0].click();
 						// any additional code if there's a captcha/additional choice?
-					} 
+					}
 					// reload the page to check for new incoming nukes
 					else {
 						window.location.reload();
@@ -186,7 +187,7 @@ var facID = "21"; // update when N-Day starts!
 					window.location.href = "https://www.nationstates.net/page=nukes/view=targets";
 				}
 			}
-			// Go to Puppet Login (\) 
+			// Go to Puppet Login (\)
 			else if (e.keyCode == 220) {
 				window.location.href = "https://www.nationstates.net/page=blank/puppetlist";
 			}
