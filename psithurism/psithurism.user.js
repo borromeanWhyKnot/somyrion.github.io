@@ -115,8 +115,8 @@ var facID = "21"; // update when N-Day starts!
 				// if we're on the incoming nukes page
 				if (window.location.href.indexOf("fid="+facID+"/view=incoming") > -1) {
 					// shield the first incoming set in the list
-					if ($('buttons to shield incoming nukes, all of them (presumably a class)').length > 0) {
-						$('buttons to shield incoming nukes, all of them (presumably a class)')[0].click();
+					if ($('.button[name="defend"]').length > 0) {
+						$('.button[name="defend"]')[0].click();
 						// any additional code if there's a captcha/additional choice?
 					} 
 					// reload the page to check for new incoming nukes
@@ -154,10 +154,12 @@ var facID = "21"; // update when N-Day starts!
 						var minToTarget = 100 - already;
 						var maxToTarget = minToTarget + 15;
 						// choose the number of nukes within the right range
-						$('buttons to target nukes, all of them (presumably a class)').each(function(i) {
-							var buttonValue = parseInt(this.attr("value").match(regexFindNumber)[0]);
-							if (buttonValue >= minToTarget && buttonValue <= maxToTarget) {
-								this.click();
+						$('.button[name="nukes"]').each(function(i) {
+							
+							var buttonValue = parseInt($(this).attr("value"));
+							if (buttonValue <= maxToTarget) {
+								var currentWindow = window.location.href;
+								window.location.href = currentWindow + "&nukes=" + buttonValue;
 								// any additional code if there's a captcha/additional choice?
 								return false;
 							}
@@ -170,10 +172,10 @@ var facID = "21"; // update when N-Day starts!
 			}
 			// Launch Nukes (L, L, L)
 			else if (e.keyCode == 76) {
-				if (window.location.href.indexOf("view=targeted") > -1 && window.location.href.indexOf("page=nukes") > -1 && (window.location.href.indexOf("nation="+$('body').attr('data-nname')) > -1 || window.location.href.indexOf("/nation=") <= -1)) {
+				if (window.location.href.indexOf("view=targets") > -1 && window.location.href.indexOf("page=nukes") > -1 && (window.location.href.indexOf("nation="+$('body').attr('data-nname')) > -1 || window.location.href.indexOf("/nation=") <= -1)) {
 					// launch the first set in the list
-					if ($('buttons to launch targeted nukes, all of them (presumably a class)').length > 0) {
-						$('buttons to launch targeted nukes, all of them (presumably a class)')[0].click();
+					if ($('.button[name="launch"]').length > 0) {
+						$('.button[name="launch"]')[0].click();
 						// any additional code if there's a captcha/additional choice?
 					} 
 					// reload the page to check for new incoming nukes
@@ -182,7 +184,7 @@ var facID = "21"; // update when N-Day starts!
 					}
 				}
 				else {
-					window.location.href = "https://www.nationstates.net/page=nukes/view=targeted";
+					window.location.href = "https://www.nationstates.net/page=nukes/view=targets";
 				}
 			}
 			// Go to Puppet Login (\) 
