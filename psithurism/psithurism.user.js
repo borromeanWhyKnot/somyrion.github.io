@@ -104,7 +104,7 @@ var facID = "21"; // update when N-Day starts!
 			// Your Nukes, Your Faction (Spacebar, Spacebar)
 			else if (e.keyCode == 32 && e.target == document.body) {
 				if (window.location.href.indexOf("page=nukes") > -1 && window.location.href.indexOf("/view=") <= -1 && (window.location.href.indexOf("nation="+$('body').attr('data-nname')) > -1 || window.location.href.indexOf("/nation=") <= -1)) {
-					$('.factionname')[0].click();
+					window.location.href = "https://www.nationstates.net/page=faction/fid="+facID;
 				}
 				else {
 					window.location.href = "https://www.nationstates.net/page=nukes";
